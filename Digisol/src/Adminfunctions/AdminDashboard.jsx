@@ -112,7 +112,6 @@ export default function AdminDashboard({ onBack, onNavigate, products = [] }) {
       description:
         'Broadcast enterprise notices, review real-time register alerts, cash discrepancy warnings, and daily closeout memos.',
       icon: Bell,
-      badge: '2 New',
       iconAlert: true,
       statusTone: 'danger',
       status: <strong>2 Unread Priority Alerts</strong>,
@@ -295,7 +294,7 @@ export default function AdminDashboard({ onBack, onNavigate, products = [] }) {
               <LockKeyhole size={15} strokeWidth={2} />
               <span>Restricted Administrative Access</span>
             </div>
-            <p>DIGISOL Enterprise System • High Integrity AES-256 GCM</p>
+            <p>WorkHouse System • High Integrity AES-256 GCM</p>
           </footer>
         </div>
       </main>
