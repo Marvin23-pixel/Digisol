@@ -28,10 +28,7 @@ function Home({ onNavigate, isChatbotOpen, onOpenChatbot, onCloseChatbot }) {
       <header className="home-header">
         <div className="header-content">
           <div className="header-left">
-            <img className="brand-logo" src={Logo} alt="Digisol logo" />
-            <div className="header-title"><span>Dashboard</span></div>
-          </div>
-          <div className="header-actions">
+            {/* Chatbot button: first item on the left, before the logo (same as Records) */}
             <button
               className="notification-button chatbot-circle-button"
               type="button"
@@ -40,6 +37,7 @@ function Home({ onNavigate, isChatbotOpen, onOpenChatbot, onCloseChatbot }) {
               style={{
                 width: 48,
                 height: 48,
+                flexShrink: 0,
                 borderRadius: "50%",
                 display: "inline-flex",
                 alignItems: "center",
@@ -87,8 +85,13 @@ function Home({ onNavigate, isChatbotOpen, onOpenChatbot, onCloseChatbot }) {
               </svg>
               <span className="notification-dot" />
             </button>
+
+            <img className="brand-logo" src={Logo} alt="Digisol logo" />
+            <div className="header-title"><span>Dashboard</span></div>
+          </div>
+          <div className="header-actions">
             <div className="online-indicator" />
-          </div>  
+          </div>
         </div>
       </header>
 
