@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import '../Styles/login.css';
 import { findStaffByCredentials, logStaffIn } from "../utils/staffStore.js";
-import Logo from '../assets/Logs.png';
 
 const VALID_DEFAULTS = {
   staffId: 'sarah.j@digisol.com',
@@ -98,7 +97,6 @@ export default function Login({ onLogin, onForgotPassword }) {
 
         <section className="brand-section" aria-label="Store context">
           <div className="brand-row">
-            <img src={Logo} alt="Workhouse logo" className="brand-logo" />
             <h1>DIGISOL WORKSPACE</h1>
           </div>
           <div className="context-pills">
