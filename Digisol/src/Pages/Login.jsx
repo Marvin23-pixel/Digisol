@@ -99,7 +99,7 @@ export default function Login({ onLogin, onForgotPassword }) {
         <section className="brand-section" aria-label="Store context">
           <div className="brand-row">
             <img src={Logo} alt="Workhouse logo" className="brand-logo" />
-            <h1>DIGISOL</h1>
+            <h1>DIGISOL WORKSPACE</h1>
           </div>
           <div className="context-pills">
             <span className="context-pill">
