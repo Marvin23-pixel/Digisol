@@ -58,11 +58,12 @@
   overflow: hidden;
   font-size: var(--mark);
   padding: 0.12em 0;
+  /* margin-left: -0.1em; */ /* uncomment to pull the name even closer to the logo */
 }
 
 .splash__name {
   display: block;
-  padding-left: 0.4em;
+  padding-left: 0.08em; /* gap between logo and name (was 0.4em) */
   font-size: 1em;
   font-weight: 700;
   letter-spacing: 0.04em;
