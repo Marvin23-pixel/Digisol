@@ -1,0 +1,203 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #ffffff;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  opacity: 1;
+  transition: opacity var(--fade-out, 0.5s) ease;
+}
+
+.splash--leaving {
+  opacity: 0;
+}
+
+.splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* ---------- Logo + name ---------- */
+
+.splash__lockup {
+  display: flex;
+  align-items: center;
+  --shift: 0px; /* set from Splash.jsx: half the wordmark width */
+  --mark: clamp(1.9rem, 8vw, 2.75rem); /* name font size, shared with the logo */
+  --logo-scale: 2; /* logo height = name size x this. Raise it if the logo still looks small */
+}
+
+.splash__logo {
+  /* Sized from the name's font size so the two always stay balanced */
+  width: calc(var(--mark) * var(--logo-scale));
+  height: calc(var(--mark) * var(--logo-scale));
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0.4);
+  /* starts centred on screen (shifted right by half the wordmark) */
+  translate: var(--shift) 0;
+  animation:
+    /* 1) pop in at the centre: 0.2s -> 0.9s */
+    logo-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards,
+    /* 2) slide to the left: 1.0s -> 1.9s */
+    logo-slide 0.9s cubic-bezier(0.65, 0, 0.35, 1) 1s forwards;
+}
+
+/* The wordmark keeps its full width the whole time, so it never moves the
+   logo. It only clips the name until the name slides out. */
+.splash__wordmark {
+  display: block;
+  overflow: hidden;
+  font-size: var(--mark);
+  padding: 0.12em 0;
+}
+
+.splash__name {
+  display: block;
+  padding-left: 0.4em;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateX(-100%);
+  /* 3) name slides out only after the logo has stopped: 2.0s -> 3.4s */
+  animation: name-slide 1.4s cubic-bezier(0.22, 1, 0.36, 1) 2s forwards;
+}
+
+/* ---------- Tagline ---------- */
+
+.splash__tagline {
+  margin: 18px 0 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 0;
+  animation: fade-in 0.6s ease 3.5s forwards;
+}
+
+/* ---------- Loader ---------- */
+
+.splash__loader {
+  width: min(260px, 72vw);
+  margin-top: 56px;
+  opacity: 0;
+  animation: fade-in 0.5s ease 4s forwards;
+}
+
+.splash__track {
+  height: 3px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Bar runs 4.1s -> 6.4s. SHOW_FOR in Splash.jsx is based on this. */
+.splash__fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: fill-bar 2.3s cubic-bezier(0.45, 0.05, 0.3, 1) 4.1s forwards;
+}
+
+.splash__status {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Per-dot animation-delay is set inline in Splash.jsx */
+.splash__dots span {
+  opacity: 0.2;
+  animation: dot-blink 1.2s ease-in-out infinite;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes logo-pop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes logo-slide {
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes name-slide {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fill-bar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes dot-blink {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Laptop / desktop: centred column, same as the Home page ---------- */
+
+@media (min-width: 768px) {
+  .splash {
+    background: #ffffff;
+  }
+
+  .splash__content {
+    width: 100%;
+    max-width: 850px;
+    height: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    background: #0f1550;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .splash__logo,
+  .splash__name,
+  .splash__tagline,
+  .splash__loader,
+  .splash__fill {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+  }
+
+  .splash__dots span {
+    animation: none;
+    opacity: 1;
+  }
+}

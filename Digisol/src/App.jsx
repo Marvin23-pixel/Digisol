@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import Splash from "./Pages/Splash";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Sales from "./Pages/Sales";
@@ -14,6 +15,7 @@ import Settings from "./Adminfunctions/Settings";
 import { logStaffOut } from "./utils/staffStore.js";
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentStaff, setCurrentStaff] = useState(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -48,6 +50,12 @@ function App() {
     }, 1000);
   };
 
+  // The very first screen: Splash. It stays until it calls onFinish.
+  // Logging out returns to Login (not Splash), since showSplash stays false.
+  if (showSplash) {
+    return <Splash onFinish={() => setShowSplash(false)} />;
+  }
+
   // Show a loading screen while logging out
   if (isLoggingOut) {
     return (
@@ -69,7 +77,7 @@ function App() {
     );
   }
 
-  // Show Login first. Login calls onLogin after the credentials are accepted.
+  // Show Login after the splash. Login calls onLogin after the credentials are accepted.
   if (!isAuthenticated) {
     return <Login onLogin={handleLogin} />;
   }
